@@ -1,0 +1,14 @@
+version: '3.0'
+
+services:
+  mysql:
+    build: ./docker/mysql
+    volumes:
+      - /var/lib/mysql
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE:      nordic
+      MYSQL_USER:          user
+      MYSQL_PASSWORD:      userpass
+      MYSQL_ROOT_PASSWORD: root
