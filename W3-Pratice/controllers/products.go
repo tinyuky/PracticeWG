@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"product-service/models"
-
+	"product-service/tranfer"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,5 +17,8 @@ func HanldeGetProductsList(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(200, products)
+	categoriesData, _ := models.GetCategoryByIdList(&products)
+	productsDto, _ := tranfer.MapProductForResponse(&products, categoriesData)
+
+	ctx.JSON(200, &productsDto)
 }

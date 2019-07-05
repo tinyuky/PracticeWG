@@ -5,6 +5,7 @@ services:
     build: ./docker/mysql
     volumes:
       - /var/lib/mysql
+      - ./docker/db:/root
     ports:
       - '3306:3306'
     environment:
