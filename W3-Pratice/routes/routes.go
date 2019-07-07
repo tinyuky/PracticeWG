@@ -16,7 +16,7 @@ func Start() {
 	}
 
 	route := gin.Default()
-	route.GET("/products", controllers.HanldeGetProductsList)
-	route.GET("/categories", controllers.HanldeGetCategoriesList)
+	route.GET("/products", controllers.HandleGetProductsList)
+	route.GET("/categories", controllers.HandleGetCategoriesList)
 	route.Run(":" + port)
 }

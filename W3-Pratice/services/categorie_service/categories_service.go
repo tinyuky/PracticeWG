@@ -4,23 +4,23 @@ import (
 	"io/ioutil"
 	"net/http"
 	"product-service/config"
+	"product-service/helper"
 	"strings"
-	"fmt"
 )
 
 const PATH_CATEGORY_LIST = "categories"
 
-func FetchCategoryByIdList(idList []string) (response []byte, err error){
+func FetchCategoryByIdList(idList *[]string) (response []byte, err error){
 	req, err := http.NewRequest("GET", config.CATEGORY_SERVICE_ENDPOINT + PATH_CATEGORY_LIST, nil)
 
 	if err != nil {
 		return
 	}
 	q := req.URL.Query()
-	q.Add("ids", strings.Join(idList, ","))
+	uniIDList := helper.UniStrSlice(idList)
+	q.Add("ids", strings.Join(uniIDList, ","))
 
 	req.URL.RawQuery = q.Encode()
-	fmt.Println(req.URL.String())
 	client := &http.Client{}
 	resp, err := client.Do(req)
 
@@ -28,7 +28,6 @@ func FetchCategoryByIdList(idList []string) (response []byte, err error){
 		return
 	}
 	defer resp.Body.Close()
-	fmt.Println(resp)
 	response, err = ioutil.ReadAll(resp.Body)
 
 	if err != nil {

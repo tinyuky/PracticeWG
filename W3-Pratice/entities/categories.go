@@ -1,4 +1,3 @@
-
 package entities
 
 type Categories struct {

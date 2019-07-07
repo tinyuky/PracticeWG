@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func HanldeGetCategoriesList(ctx *gin.Context) {
+func HandleGetCategoriesList(ctx *gin.Context) {
 	idList := ctx.Query("ids")
 	idListArray := strings.Split(idList, ",")
 	categories, err := models.GetListCategory(idListArray)
